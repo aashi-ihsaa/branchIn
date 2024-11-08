@@ -20,14 +20,13 @@ Ensure the following are installed on your machine:
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/realtime-messaging-portal.git
-cd realtime-messaging-portal
+git clone https://github.com/aashi-ihsaa/branchIn.git
+cd branchIn
 ```
 
 #### 2. Install Server Dependencies
 Navigate to the `server` directory and install the necessary packages:
 ```bash
-cd server
 npm install
 ```
 
@@ -43,34 +42,25 @@ npm install
    CREATE USER branch_user WITH ENCRYPTED PASSWORD 'yourpassword';
    GRANT ALL PRIVILEGES ON DATABASE messaging_portal TO branch_user;
    ```
-3. Update the database connection settings in `server/config/database.js`:
-   ```javascript
-   module.exports = {
-       user: 'branch_user',
-       host: 'localhost',
-       database: 'messaging_portal',
-       password: 'yourpassword',
-       port: 5432,
-   };
-   ```
+3. Update the database connection settings in `/.env`:
 4. Run migrations or scripts to set up the necessary `messages` table schema.
 
 #### 4. Start the Server
-From the `server` directory, start the server:
+From the directory, start the server:
 ```bash
-node index.js
+node server.js
 ```
+
 The server should now be running at `http://localhost:5000`.
 
 #### 5. Install Client Dependencies
-Navigate to the `client` directory and install the required packages:
+Navigate to the `branch_chat_frontend` directory and install the required packages:
 ```bash
-cd ../client
 npm install
 ```
 
 #### 6. Start the Client
-From the `client` directory:
+From the `frontend` directory:
 ```bash
 npm start
 ```
@@ -101,4 +91,17 @@ Messages marked as "high" urgency are automatically sorted to the top, enabling 
 
 - **Agent Work Distribution**: Implement a system to assign messages to specific agents and avoid duplicate handling.
 - **Customer Context Display**: Display additional customer information (external/internal) for better context in handling inquiries.
+
+## Screenshots
+
+![
+
+](image.png)
+
+![alt text](image-1.png)
+![
+    
+](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
 
