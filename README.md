@@ -94,14 +94,9 @@ Messages marked as "high" urgency are automatically sorted to the top, enabling 
 
 ## Screenshots
 
-![
-
-](image.png)
-
+![alt](image.png)
 ![alt text](image-1.png)
-![
-    
-](image-2.png)
+![alt](image-2.png)
 ![alt text](image-3.png)
 ![alt text](image-4.png)
 
