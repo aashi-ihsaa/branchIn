@@ -1,45 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import './App.css';
+import MessageTable from './MessageTable';  // For the agent portal
+import CustomerMessageForm from './CustomerMessageForm';  // For the customer portal
 
 function App() {
-    const [messages, setMessages] = useState([]);
-    const [selectedMessage, setSelectedMessage] = useState(null);
-    const [response, setResponse] = useState('');
-
-    useEffect(() => {
-        fetchMessages();
-    }, []);
-
-    const fetchMessages = async () => {
-        const res = await axios.get('http://localhost:5000/api/messages');
-        setMessages(res.data);
-    };
-
-    const handleResponse = async (id) => {
-        await axios.post(`http://localhost:5000/api/messages/${id}/respond`, { response });
-        setResponse('');
-        fetchMessages();
-    };
-
-    return (
-        <div>
-            <h1>Customer Support Dashboard</h1>
-            <div className="message-list">
-                {messages.map((msg) => (
-                    <div key={msg.id} onClick={() => setSelectedMessage(msg)}>
-                        <h3>{msg.message}</h3>
-                    </div>
-                ))}
-            </div>
-            {selectedMessage && (
-                <div>
-                    <h2>Reply to: {selectedMessage.message}</h2>
-                    <textarea value={response} onChange={(e) => setResponse(e.target.value)} />
-                    <button onClick={() => handleResponse(selectedMessage.id)}>Send</button>
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li><Link to="/agent">Agent Portal</Link></li>
+            <li><Link to="/customer">Customer Portal</Link></li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/agent" element={<MessageTable />} />
+          <Route path="/customer" element={<CustomerMessageForm />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

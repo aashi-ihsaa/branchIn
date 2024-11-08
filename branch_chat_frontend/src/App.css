@@ -1,38 +1,70 @@
-.App {
-  text-align: center;
+/* Customer Form Styles */
+.customer-form {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 30px auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.customer-form h1 {
+  color: #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.customer-form input, .customer-form select, .customer-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.customer-form button {
+  background-color: #4CAF50;
   color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.customer-form button:hover {
+  background-color: #45a049;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Agent Table Styles */
+.agent-table {
+  padding: 20px;
+}
+
+.agent-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.agent-table th, .agent-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.agent-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.agent-table button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.agent-table button:hover {
+  background-color: #45a049;
+}
+
+.agent-table a {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
 }
