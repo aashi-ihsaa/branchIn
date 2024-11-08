@@ -63,7 +63,33 @@ app.post('/api/messages', async (req, res) => {
   }
 });
 
-// Endpoint to respond to a message and emit the updated message
+// Endpoint to search messages by customer ID or message content
+app.get('/api/messages/search', async (req, res) => {
+  const { customerId, query } = req.query;
+
+  try {
+    let result;
+    if (customerId) {
+      result = await pool.query(
+        'SELECT * FROM messages WHERE customer_id = $1',
+        [customerId]
+      );
+    } else if (query) {
+      result = await pool.query(
+        "SELECT * FROM messages WHERE message ILIKE $1",
+        [`%${query}%`]
+      );
+    } else {
+      return res.status(400).json({ error: 'Search parameter required' });
+    }
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error searching messages:', error);
+    res.status(500).send('Server Error');
+  }
+});
+
 // Endpoint to respond to a message and emit the updated message
 app.post('/api/messages/:id/respond', async (req, res) => {
   const { id } = req.params;
@@ -83,6 +109,29 @@ app.post('/api/messages/:id/respond', async (req, res) => {
     res.sendStatus(200);
   } catch (error) {
     console.error('Error responding to message:', error);
+    res.sendStatus(500);
+  }
+});
+
+// Assign a message to an agent
+app.post('/api/messages/:id/assign', async (req, res) => {
+  const messageId = req.params.id;
+  const { agentId } = req.body;
+
+  try {
+    const result = await pool.query(
+      'UPDATE messages SET assigned_agent_id = $1 WHERE id = $2 RETURNING *',
+      [agentId, messageId]
+    );
+
+    const assignedMessage = result.rows[0];
+    if (assignedMessage) {
+      io.emit('messageAssigned', assignedMessage);
+    }
+
+    res.status(200).json(assignedMessage);
+  } catch (error) {
+    console.error('Error assigning message:', error);
     res.sendStatus(500);
   }
 });
